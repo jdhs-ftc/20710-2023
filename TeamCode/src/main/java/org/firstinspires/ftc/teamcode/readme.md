@@ -1,4 +1,4 @@
-## TeamCode Module
+[BasicOmniOpMode_Linear.java](..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2FFtcRobotController%2Fsrc%2Fmain%2Fjava%2Forg%2Ffirstinspires%2Fftc%2Frobotcontroller%2Fexternal%2Fsamples%2FBasicOmniOpMode_Linear.java)## TeamCode Module
 
 Welcome!
 
@@ -129,3 +129,4 @@ Note: Some names start with "Team" and others start with "team".  This is intent
 5)  Add:    include ':Team0417' to the "/settings.gradle" file.
     
 6)  Open up Android Studios and clean out any old files by using the menu to "Build/Clean Project""
+7) 
