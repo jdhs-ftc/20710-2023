@@ -1,6 +1,4 @@
-package org.firstinspires.ftc.teamcode;
-
-public class drive {/* Copyright (c) 2021 FIRST. All rights reserved.
+/* Copyright (c) 2021 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -66,9 +64,8 @@ import com.qualcomm.robotcore.hardware.Servo;
      * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
      */
 
-    @TeleOp(name="Basic: Omni Linear OpMode", group="Linear OpMode")
-    @Disabled
-    public class BasicOmniOpMode_Linear extends LinearOpMode {
+    @TeleOp(name="drive", group="Linear OpMode")
+    public class drive extends LinearOpMode {
 
         // Declare OpMode members for each of the 4 motors.
         private ElapsedTime runtime = new ElapsedTime();
@@ -118,8 +115,8 @@ import com.qualcomm.robotcore.hardware.Servo;
                 double axial   =  0.75 * -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
                 double lateral =  0.75 * gamepad1.left_stick_x;
                 double yaw     =  0.5 * gamepad1.right_stick_x;
-                if gamepad1.a = 1{
-                    clawgrip.setposition(.5);
+                if (gamepad1.a) {
+                    clawgrip.setPosition(.5);
                 }
 
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
@@ -173,4 +170,4 @@ import com.qualcomm.robotcore.hardware.Servo;
             }
         }}
 
-}
+
