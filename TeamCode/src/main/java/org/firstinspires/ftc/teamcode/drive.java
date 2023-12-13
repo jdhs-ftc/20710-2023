@@ -116,9 +116,11 @@ import com.qualcomm.robotcore.hardware.Servo;
                 double lateral =  0.75 * gamepad1.left_stick_x;
                 double yaw     =  0.5 * gamepad1.right_stick_x;
                 if (gamepad1.a) {
-                    clawgrip.setPosition(.5);
+                    clawgrip.setPosition(.95);
                 }
-
+                if (gamepad1.b) {
+                    clawgrip.setPosition(.85);
+                }
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
                 double leftFrontPower  = axial + lateral + yaw;
