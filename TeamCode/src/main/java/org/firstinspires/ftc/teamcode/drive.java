@@ -74,6 +74,7 @@ import com.qualcomm.robotcore.hardware.Servo;
         private DcMotor rightFrontDrive = null;
         private DcMotor rightBackDrive = null;
         private Servo clawgrip = null;
+        private DcMotor arm = null;
         @Override
         public void runOpMode() {
 
@@ -84,6 +85,7 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightFrontDrive = hardwareMap.get(DcMotor.class, "frontright");
             rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
             clawgrip = hardwareMap.get(Servo.class, "clawgrip");
+            arm= hardwareMap.get(DcMotor.class,"arm");
 
             // ########################################################################################
             // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -120,6 +122,14 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
                 if (gamepad1.b) {
                     clawgrip.setPosition(.85);
+                }
+                if (gamepad1.dpad_up) {
+                    arm.setPower(.5);
+
+                } else if (gamepad1.dpad_down) {
+                    arm.setPower(-.5);
+                } else {
+                       arm.setPower(0);
                 }
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
