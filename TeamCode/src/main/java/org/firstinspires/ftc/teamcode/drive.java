@@ -102,6 +102,8 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
             rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
+
+
             // Wait for the game to start (driver presses PLAY)
             telemetry.addData("Status", "Initialized");
             telemetry.update();
@@ -110,26 +112,44 @@ import com.qualcomm.robotcore.hardware.Servo;
             runtime.reset();
 
             // run until the end of the match (driver presses STOP)
+
             while (opModeIsActive()) {
                 double max;
+                double speedLeft= 0.75;
+                double speedRight = 0.5;
 
+                //if statement controlling speed
+                if(gamepad1.right_bumper)
+                {
+                    speedLeft = 0.25;
+                    speedRight = .15;
+                }
+                else {
+                    speedLeft = .75;
+                    speedRight = .5;
+                }
                 // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-                double axial   =  0.75 * -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-                double lateral =  0.75 * gamepad1.left_stick_x;
-                double yaw     =  0.5 * gamepad1.right_stick_x;
+                double axial   =  speedLeft * -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
+                double lateral =  speedLeft * gamepad1.left_stick_x;
+                double yaw =  speedRight * gamepad1.right_stick_x;
+
+
                 if (gamepad1.a) {
                     clawgrip.setPosition(.95);
                 }
                 if (gamepad1.b) {
-                    clawgrip.setPosition(.85);
+                    clawgrip.setPosition(.88);
                 }
-                if (gamepad1.dpad_up) {
-                    arm.setPower(.5);
 
-                } else if (gamepad1.dpad_down) {
-                    arm.setPower(-.5);
-                } else {
-                       arm.setPower(0);
+                if (gamepad1.dpad_up) {
+                    arm.setTargetPosition(70);
+                    arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm.setPower(.3);
+                }
+                if (gamepad1.dpad_down) {
+                    arm.setTargetPosition(2);
+                    arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm.setPower(0);
                 }
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
@@ -178,6 +198,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
                 telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
                 telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+                telemetry.addData("motor_arm position" ,arm.getCurrentPosition());
                 telemetry.update();
             }
         }}
