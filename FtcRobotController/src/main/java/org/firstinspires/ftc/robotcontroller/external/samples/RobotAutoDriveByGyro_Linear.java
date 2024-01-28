@@ -41,7 +41,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 /*
- *  This OpMode illustrates the concept of driving an autonomous path based on Gyro (IMU) heading and encoder counts.
+ *  This OpMode illustrates the concept of driving an autobotred.java path based on Gyro (IMU) heading and encoder counts.
  *  The code is structured as a LinearOpMode
  *
  *  The path to be followed by the robot is built from a series of drive, turn or pause steps.

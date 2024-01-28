@@ -75,6 +75,8 @@ import com.qualcomm.robotcore.hardware.Servo;
         private DcMotor rightBackDrive = null;
         private Servo clawgrip = null;
         private DcMotor arm = null;
+        double armTargetPosition = 0;
+        double armError;
         @Override
         public void runOpMode() {
 
@@ -86,6 +88,8 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
             clawgrip = hardwareMap.get(Servo.class, "clawgrip");
             arm= hardwareMap.get(DcMotor.class,"arm");
+            arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             // ########################################################################################
             // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -114,6 +118,10 @@ import com.qualcomm.robotcore.hardware.Servo;
             // run until the end of the match (driver presses STOP)
 
             while (opModeIsActive()) {
+                // PID
+                armError =  armTargetPosition - arm.getCurrentPosition();
+                arm.setPower(armError * .013);
+
                 double max;
                 double speedLeft= 0.75;
                 double speedRight = 0.5;
@@ -135,22 +143,34 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
                 if (gamepad1.a) {
-                    clawgrip.setPosition(.95);
+                    clawgrip.setPosition(.8);
                 }
                 if (gamepad1.b) {
-                    clawgrip.setPosition(.88);
+                    clawgrip.setPosition(.9);
                 }
 
                 if (gamepad1.dpad_up) {
-                    arm.setTargetPosition(70);
+                    armTargetPosition = 70;
+                    /*
+                    arm.setTargetPosition(40);
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    arm.setPower(.3);
+                    arm.setPower(.5);
+                    */
                 }
                 if (gamepad1.dpad_down) {
-                    arm.setTargetPosition(2);
+                    armTargetPosition = -20;
+                    /*
+                    arm.setTargetPosition(0);
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     arm.setPower(0);
+                    */
+
                 }
+                //{
+               //     if (gamepad1.y) arm.setPower(-.1);
+                 //   stop(1);
+                   // arm.
+                //} work in progress encoder reset system.
                 // Combine the joystick requests for each axis-motion to determine each wheel's power.
                 // Set up a variable for each drive wheel to save the power level for telemetry.
                 double leftFrontPower  = axial + lateral + yaw;
@@ -188,6 +208,7 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightBackPower  = gamepad1.b ? 1.0 : 0.0;  // B gamepad
             */
 
+
                 // Send calculated power to wheels
                 leftFrontDrive.setPower(leftFrontPower);
                 rightFrontDrive.setPower(rightFrontPower);
@@ -199,7 +220,11 @@ import com.qualcomm.robotcore.hardware.Servo;
                 telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
                 telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
                 telemetry.addData("motor_arm position" ,arm.getCurrentPosition());
+                telemetry.addData("armerror",armError);
+                telemetry.addData("armtargposition",armTargetPosition);
+                telemetry.addData("clawpos",clawgrip.getPosition());
                 telemetry.update();
+
             }
         }}
 
