@@ -150,7 +150,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
 
                 if (gamepad1.dpad_up) {
-                    armTargetPosition = 70;
+                    armTargetPosition = 60;
                     /*
                     arm.setTargetPosition(40);
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);

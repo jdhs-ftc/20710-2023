@@ -176,7 +176,7 @@ public class drive2P extends LinearOpMode {
         //{
         //     if (gamepad1.y) arm.setPower(-.1);
         //   stop(1);
-        armTargetPosition = armTargetPosition - (gamepad2.right_stick_y*.1);
+        armTargetPosition = armTargetPosition - (gamepad2.right_stick_y*.3);
         // arm.
         //} work in progress encoder reset system.
         // Combine the joystick requests for each axis-motion to determine each wheel's power.
