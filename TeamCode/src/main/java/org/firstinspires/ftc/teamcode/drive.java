@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -75,6 +76,7 @@ import com.qualcomm.robotcore.hardware.Servo;
         private DcMotor rightBackDrive = null;
         private Servo clawgrip = null;
         private DcMotor arm = null;
+        private CRServo plane = null;
         double armTargetPosition = 0;
         double armError;
         @Override
@@ -88,6 +90,7 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
             clawgrip = hardwareMap.get(Servo.class, "clawgrip");
             arm= hardwareMap.get(DcMotor.class,"arm");
+            plane= hardwareMap.get(CRServo.class, "plane");
             arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -150,7 +153,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 }
 
                 if (gamepad1.dpad_up) {
-                    armTargetPosition = 60;
+                    armTargetPosition = 75;
                     /*
                     arm.setTargetPosition(40);
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -164,6 +167,12 @@ import com.qualcomm.robotcore.hardware.Servo;
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     arm.setPower(0);
                     */
+
+                }
+                {
+                    if (gamepad1.left_bumper)
+                        plane.setPower(-.3);
+                    else plane.setPower(0);
 
                 }
                 //{
