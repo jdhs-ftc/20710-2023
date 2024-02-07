@@ -129,7 +129,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 double speedLeft= 0.75;
                 double speedRight = 0.5;
 
-                //if statement controlling speed
+                //if statem    ent controlling speed
                 if(gamepad1.right_bumper)
                 {
                     speedLeft = 0.25;
@@ -168,6 +168,12 @@ import com.qualcomm.robotcore.hardware.Servo;
                     arm.setPower(0);
                     */
 
+                }
+                {
+                    if (gamepad1.y) {
+                        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+                    }
                 }
                 {
                     if (gamepad1.left_bumper)
