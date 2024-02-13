@@ -147,10 +147,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
                 if (gamepad1.a) {
                     clawgrip.setPosition(.8);
-                }
+                }//close Klaw
                 if (gamepad1.b) {
                     clawgrip.setPosition(.9);
-                }
+                }//open Klaw
 
                 if (gamepad1.dpad_up) {
                     armTargetPosition = 75;
@@ -159,7 +159,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     arm.setPower(.5);
                     */
-                }
+                }// ARM UP
                 if (gamepad1.dpad_down) {
                     armTargetPosition = -20;
                     /*
@@ -167,19 +167,19 @@ import com.qualcomm.robotcore.hardware.Servo;
                     arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     arm.setPower(0);
                     */
-
+//ARM DOWN
                 }
                 {
                     if (gamepad1.y) {
                         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                         arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-                    }
+                    }//This resets the encoders at the motors current position
                 }
                 {
                     if (gamepad1.left_bumper)
                         plane.setPower(-.3);
                     else plane.setPower(0);
-
+//this launches the paper airplane.
                 }
                 //{
                //     if (gamepad1.y) arm.setPower(-.1);
