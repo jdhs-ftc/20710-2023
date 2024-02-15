@@ -53,7 +53,7 @@ public class ExampleVisionAuto extends LinearOpMode {
 
                 break;
             case CENTER:
-                //TODO: Center side autonomous here
+                //added center thingie
                 //set direction
                 leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
                 leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
