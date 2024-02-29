@@ -76,7 +76,7 @@ import com.qualcomm.robotcore.hardware.Servo;
         private DcMotor rightBackDrive = null;
         private Servo clawgrip = null;
         private DcMotor arm = null;
-        private CRServo plane = null;
+        private Servo plane = null;
         double armTargetPosition = 0;
         double armError;
         @Override
@@ -90,7 +90,7 @@ import com.qualcomm.robotcore.hardware.Servo;
             rightBackDrive = hardwareMap.get(DcMotor.class, "backright");
             clawgrip = hardwareMap.get(Servo.class, "clawgrip");
             arm= hardwareMap.get(DcMotor.class,"arm");
-            plane= hardwareMap.get(CRServo.class, "plane");
+            plane= hardwareMap.get(Servo.class, "plane");
             arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -175,10 +175,22 @@ import com.qualcomm.robotcore.hardware.Servo;
                         arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                     }//This resets the encoders at the motors current position
                 }
+
+                //plane launch
                 {
-                    if (gamepad1.left_bumper)
-                        plane.setPower(-.3);
-                    else plane.setPower(0);
+                    if (gamepad1.left_bumper) {
+
+                        plane.setPosition(0);
+                       sleep(3000);
+                       plane.setPosition(1);
+
+
+                    }
+                      
+
+                      //for CR servo
+                        //plane.setPower(-.3);
+                    //else plane.setPower(0);
 //this launches the paper airplane.
                 }
                 //{
@@ -238,6 +250,7 @@ import com.qualcomm.robotcore.hardware.Servo;
                 telemetry.addData("armerror",armError);
                 telemetry.addData("armtargposition",armTargetPosition);
                 telemetry.addData("clawpos",clawgrip.getPosition());
+                telemetry.addData("clawpos",plane.getPosition());
                 telemetry.update();
 
             }
